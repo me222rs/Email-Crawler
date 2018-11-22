@@ -5,6 +5,8 @@ from urllib.parse import urlsplit
 from collections import deque
 import time
 import re
+import random
+from itertools import repeat
 
 
 class Model:
@@ -12,7 +14,10 @@ class Model:
         print("Inne i model")
 
     def process_website(self):
-        start_url = ""
+        start_url = "http://sgsesrgsrgmassaafrgmfg.se/"
+        # Sätt tidsintervall mellan varje crawl
+        min_crawl_time = 10
+        max_crawl_time = 20
 
         new_urls = deque([start_url])
 
@@ -23,7 +28,7 @@ class Model:
 
         while len(new_urls):
             self.save(emails, False)
-            time.sleep(5)
+            time.sleep(random.randint(min_crawl_time, max_crawl_time))
             url = new_urls.popleft()
 
             if start_url in url:
@@ -37,6 +42,9 @@ class Model:
                 try:
                     response = requests.get(url)
                 except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError):
+                    print("Connection error. Trying again in 60 minutes")
+                    time.sleep(3600)
+                    new_urls.append(url)
                     continue
 
                 new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", response.text, re.I))
@@ -57,8 +65,6 @@ class Model:
             else:
                 print("Extern url hittad: "+url)
                 external_urls.add(url)
-            if not new_urls:
-                self.result(emails, processed_urls, True)
 
     def result(self, emails):
         print("----- Klar -----")
@@ -69,5 +75,8 @@ class Model:
         self.save(emails)
 
     def save(self, emails, test):
-        print(emails)
-        print(test)
+        print("Saving")
+        with open("Output.txt", "w") as text_file:
+            for item in emails:
+                text_file.write(item+"\n")
+
