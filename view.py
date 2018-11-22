@@ -1,24 +1,34 @@
-from tkinter import *
+# from tkinter import *
 from models import model
 import threading
 
 
 class View:
-    def __init__(self, master):
-        frame = Frame(master)
-        frame.pack()
+    def __init__(self):
+        self.main()
 
-        self.printButton = Button(frame, text="Start", command=self.start)
-        self.printButton.pack(side=LEFT)
+    def main(self):
+        self.showMainMenu()
+        option = input()
 
-        self.quitButton = Button(frame, text="Quit", command=master.destroy)
-        self.quitButton.pack(side=LEFT)
+        if option == "1":
+            url = self.chooseURL()
+            self.start(url)
+        elif option == "2":
+            exit(0)
 
-    def start(self):
+    def chooseURL(self):
+        url = input()
+        return url
+
+    def start(self, url):
         m = model.Model()
-        m.process_website()
+        m.process_website(url)
+
+    def showMainMenu(self):
+        print("----- Email Crawler -----")
+        print("Press 1 to start")
+        print("Press 2 to exit")
 
 
-root = Tk()
-b = View(root)
-root = mainloop()
+b = View()

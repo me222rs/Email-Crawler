@@ -13,11 +13,11 @@ class Model:
     def __init__(self):
         print("Inne i model")
 
-    def process_website(self):
-        start_url = "http://sgsesrgsrgmassaafrgmfg.se/"
+    def process_website(self, url):
+        start_url = url
         # Sätt tidsintervall mellan varje crawl
-        min_crawl_time = 10
-        max_crawl_time = 20
+        min_crawl_time = 7
+        max_crawl_time = 10
 
         new_urls = deque([start_url])
 
