@@ -7,32 +7,35 @@ import time
 import re
 import random
 from itertools import repeat
+import os
 
 
 class Model:
     def __init__(self):
         print("Inne i model")
 
+    def cls(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
+
     def process_website(self, url, resume):
-        # Sätt tidsintervall mellan varje crawl
+        # Set a time interval between crawls
         min_crawl_time = 7
         max_crawl_time = 10
 
+        start_url = url
+
         # If you choose to resume
         if resume:
+            print("Laddar")
+
+            new_urls = deque(open('data/new_urls.txt'))
+
+            processed_urls = set(open('data/processed_urls.txt'))
+            external_urls = set(open('data/external_urls.txt'))
+
+            emails = set(open('data/emails.txt'))
             print("Återupptar")
-
-            start_url = url
-
-            new_urls = deque([start_url])
-
-            processed_urls = set()
-            external_urls = set()
-
-            emails = set()
         else:
-            start_url = url
-
             new_urls = deque([start_url])
 
             processed_urls = set()
@@ -44,7 +47,8 @@ class Model:
             # Save after each crawl
             self.save(emails, processed_urls, new_urls, external_urls, emails)
 
-            time.sleep(random.randint(min_crawl_time, max_crawl_time))
+            self.cls()
+
             url = new_urls.popleft()
 
             if start_url in url:
@@ -66,7 +70,7 @@ class Model:
                 new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", response.text, re.I))
                 emails.update(new_emails)
 
-                print(new_emails)
+                print("Hittade: "+str(len(new_emails))+" epostadresser")
 
                 soup = BeautifulSoup(response.text, "html.parser")
 
@@ -78,21 +82,13 @@ class Model:
                         link = path + link
                     if not link in new_urls and not link in processed_urls:
                         new_urls.append(link)
+                time.sleep(random.randint(min_crawl_time, max_crawl_time))
             else:
                 print("Extern url hittad: "+url)
                 external_urls.add(url)
 
-    def result(self, emails):
-        print("----- Klar -----")
-        print("Epost-adresser: " + str(len(emails)))
-        # print("Urler skannade: " + str(len(processed_urls)))
-        # print("Totalt antal urler: " + str(len(processed_urls) + len(emails)))
-        print("Tid: ")
-        self.save(emails)
-
     # Saves everything
     def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses):
-        print("Saving")
         with open("Output.txt", "w") as text_file:
             for item in emails:
                 text_file.write(item+"\n")
