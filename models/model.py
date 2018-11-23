@@ -13,21 +13,37 @@ class Model:
     def __init__(self):
         print("Inne i model")
 
-    def process_website(self, url):
-        start_url = url
+    def process_website(self, url, resume):
         # Sätt tidsintervall mellan varje crawl
         min_crawl_time = 7
         max_crawl_time = 10
 
-        new_urls = deque([start_url])
+        # If you choose to resume
+        if resume:
+            print("Återupptar")
 
-        processed_urls = set()
-        external_urls = set()
+            start_url = url
 
-        emails = set()
+            new_urls = deque([start_url])
+
+            processed_urls = set()
+            external_urls = set()
+
+            emails = set()
+        else:
+            start_url = url
+
+            new_urls = deque([start_url])
+
+            processed_urls = set()
+            external_urls = set()
+
+            emails = set()
 
         while len(new_urls):
-            self.save(emails, False)
+            # Save after each crawl
+            self.save(emails, processed_urls, new_urls, external_urls, emails)
+
             time.sleep(random.randint(min_crawl_time, max_crawl_time))
             url = new_urls.popleft()
 
@@ -74,9 +90,25 @@ class Model:
         print("Tid: ")
         self.save(emails)
 
-    def save(self, emails, test):
+    # Saves everything
+    def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses):
         print("Saving")
         with open("Output.txt", "w") as text_file:
             for item in emails:
                 text_file.write(item+"\n")
 
+        with open("data/processed_urls.txt", "w") as text_file:
+            for item in processedURLs:
+                text_file.write(item+"\n")
+
+        with open("data/external_urls.txt", "w") as text_file:
+            for item in externalURLs:
+                text_file.write(item+"\n")
+
+        with open("data/new_urls.txt", "w") as text_file:
+            for item in newURLs:
+                text_file.write(item+"\n")
+
+        with open("data/emails.txt", "w") as text_file:
+            for item in emailAdresses:
+                text_file.write(item+"\n")
