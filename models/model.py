@@ -18,14 +18,15 @@ class Model:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def process_website(self, url, resume):
-        # Set a time interval between crawls
-        min_crawl_time = 7
-        max_crawl_time = 10
+        min_crawl_time = 7  # Set a time interval between crawls
+        max_crawl_time = 10  # Set a time interval between crawls
         start_url = url
         new_urls = deque()
         processed_urls = set()
         external_urls = set()
         emails = set()
+        sleeptime_if_fail = 3600  # Time the application will sleep in seconds
+        user_agents = open("user_agens.txt").readlines()  # Gets the list of user agents
 
         # If you choose to resume
         if resume:
@@ -44,6 +45,7 @@ class Model:
             with open('data/emails.txt') as file:
                 for line in file:
                     emails.add(line.strip())
+
         else:
             new_urls = deque([start_url])
             processed_urls = set()
@@ -66,10 +68,13 @@ class Model:
                 print("Processing %s" % url)
 
                 try:
-                    response = requests.get(url)
+                    headers = {
+                        'User-Agent': user_agents[random.randint(0, (len(user_agents)-1))]
+                    }
+                    response = requests.get(url, headers)
                 except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError):
                     print("Connection error. Trying again in 60 minutes")
-                    time.sleep(3600)
+                    time.sleep(sleeptime_if_fail)
                     new_urls.append(url)
                     continue
 
