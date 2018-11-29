@@ -1,5 +1,5 @@
 Output.txt
-emails.txt
-external_urls.txt
-new_urls.txt
-processed_urls.txt
+data/emails.txt
+data/external_urls.txt
+data/new_urls.txt
+data/processed_urls.txt

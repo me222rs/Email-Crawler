@@ -8,9 +8,11 @@ import re
 import random
 from itertools import repeat
 import os
+import json
 
 
 class Model:
+
     def __init__(self):
         print("Inne i model")
 
@@ -28,14 +30,30 @@ class Model:
         if resume:
             print("Laddar")
 
-            new_urls = deque(open('data/new_urls.txt'))
+            new_urls = deque()
+            with open('data/new_urls.txt') as file:
+                for line in file:
+                    new_urls.append(line.strip())
 
-            processed_urls = set(open('data/processed_urls.txt'))
-            external_urls = set(open('data/external_urls.txt'))
+            processed_urls = set()
+            with open('data/processed_urls.txt') as file:
+                for line in file:
+                    processed_urls.add(line.strip())
 
-            emails = set(open('data/emails.txt'))
+            external_urls = set()
+
+            with open('data/external_urls.txt') as file:
+                for line in file:
+                    external_urls.add(line.strip())
+
+            emails = set()
+            with open('data/emails.txt') as file:
+                for line in file:
+                    emails.add(line.strip())
+
             print("Återupptar")
         else:
+            # self.run_backup = False
             new_urls = deque([start_url])
 
             processed_urls = set()
@@ -45,7 +63,7 @@ class Model:
 
         while len(new_urls):
             # Save after each crawl
-            self.save(emails, processed_urls, new_urls, external_urls, emails)
+            self.save(emails, processed_urls, new_urls, external_urls, emails, resume)
 
             self.cls()
 
@@ -88,7 +106,11 @@ class Model:
                 external_urls.add(url)
 
     # Saves everything
-    def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses):
+    def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses, resume):
+        print("i save")
+        if emailAdresses:
+            emails = emailAdresses
+
         with open("Output.txt", "w") as text_file:
             for item in emails:
                 text_file.write(item+"\n")
