@@ -34,7 +34,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="93" />
-          <entry key="py" value="2800" />
+          <entry key="py" value="2847" />
           <entry key="settings" value="56" />
           <entry key="txt" value="4" />
         </counts>
@@ -43,7 +43,7 @@
         <counts>
           <entry key="JSON" value="56" />
           <entry key="PLAIN_TEXT" value="97" />
-          <entry key="Python" value="2800" />
+          <entry key="Python" value="2847" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -69,31 +69,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+            <state relative-caret-position="340">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding>
                 <element signature="e#24#48#0" expanded="true" />
-                <marker date="1542965461321" expanded="true" signature="144:145" ph="..." />
-                <marker date="1542965461321" expanded="true" signature="509:556" ph="..." />
-                <marker date="1542965461321" expanded="true" signature="669:738" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <marker date="1543494726083" expanded="true" signature="120:121" ph="..." />
+                <marker date="1543494726083" expanded="true" signature="485:532" ph="..." />
+                <marker date="1543494726083" expanded="true" signature="645:714" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/models/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <marker date="1543494726097" expanded="true" signature="222:253" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/emails.txt">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -153,14 +154,14 @@
         <option value="$PROJECT_DIR$/settings" />
         <option value="$PROJECT_DIR$/settings2.txt" />
         <option value="$PROJECT_DIR$/models/settings.py" />
-        <option value="$PROJECT_DIR$/view.py" />
-        <option value="$PROJECT_DIR$/models/model.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Output.txt" />
         <option value="$PROJECT_DIR$/data/new_urls.txt" />
         <option value="$PROJECT_DIR$/data/external_urls.txt" />
         <option value="$PROJECT_DIR$/data/processed_urls.txt" />
         <option value="$PROJECT_DIR$/data/emails.txt" />
+        <option value="$PROJECT_DIR$/models/model.py" />
+        <option value="$PROJECT_DIR$/view.py" />
       </list>
     </option>
   </component>
@@ -321,19 +322,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/backup" />
-    <entry file="file://$PROJECT_DIR$/view.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-          <folding>
-            <element signature="e#24#48#0" expanded="true" />
-            <marker date="1542965461321" expanded="true" signature="144:145" ph="..." />
-            <marker date="1542965461321" expanded="true" signature="509:556" ph="..." />
-            <marker date="1542965461321" expanded="true" signature="669:738" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/new_urls.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -353,18 +341,32 @@
     <entry file="file://$PROJECT_DIR$/Output.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/model.py">
+    <entry file="file://$PROJECT_DIR$/data/emails.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+        <state relative-caret-position="340">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#24#48#0" expanded="true" />
+            <marker date="1543494726083" expanded="true" signature="120:121" ph="..." />
+            <marker date="1543494726083" expanded="true" signature="485:532" ph="..." />
+            <marker date="1543494726083" expanded="true" signature="645:714" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/emails.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/models/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <marker date="1543494726097" expanded="true" signature="222:253" ph="..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

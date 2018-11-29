@@ -6,15 +6,13 @@ from collections import deque
 import time
 import re
 import random
-from itertools import repeat
 import os
-import json
 
 
 class Model:
 
     def __init__(self):
-        print("Inne i model")
+        print("Startar")
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -23,47 +21,38 @@ class Model:
         # Set a time interval between crawls
         min_crawl_time = 7
         max_crawl_time = 10
-
         start_url = url
+        new_urls = deque()
+        processed_urls = set()
+        external_urls = set()
+        emails = set()
 
         # If you choose to resume
         if resume:
-            print("Laddar")
-
-            new_urls = deque()
             with open('data/new_urls.txt') as file:
                 for line in file:
                     new_urls.append(line.strip())
 
-            processed_urls = set()
             with open('data/processed_urls.txt') as file:
                 for line in file:
                     processed_urls.add(line.strip())
-
-            external_urls = set()
 
             with open('data/external_urls.txt') as file:
                 for line in file:
                     external_urls.add(line.strip())
 
-            emails = set()
             with open('data/emails.txt') as file:
                 for line in file:
                     emails.add(line.strip())
-
-            print("Återupptar")
         else:
-            # self.run_backup = False
             new_urls = deque([start_url])
-
             processed_urls = set()
             external_urls = set()
-
             emails = set()
 
         while len(new_urls):
             # Save after each crawl
-            self.save(emails, processed_urls, new_urls, external_urls, emails, resume)
+            self.save(emails, processed_urls, new_urls, external_urls, emails)
 
             self.cls()
 
@@ -71,12 +60,11 @@ class Model:
 
             if start_url in url:
                 processed_urls.add(url)
-
                 parts = urlsplit(url)
                 base_url = "{0.scheme}://{0.netloc}".format(parts)
                 path = url[:url.rfind('/') + 1] if '/' in parts.path else url
-
                 print("Processing %s" % url)
+
                 try:
                     response = requests.get(url)
                 except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError):
@@ -106,8 +94,8 @@ class Model:
                 external_urls.add(url)
 
     # Saves everything
-    def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses, resume):
-        print("i save")
+    def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses):
+        print("Sparar...")
         if emailAdresses:
             emails = emailAdresses
 

@@ -1,4 +1,3 @@
-# from tkinter import *
 from models import model
 import threading
 
