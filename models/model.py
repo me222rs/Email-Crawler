@@ -18,8 +18,8 @@ class Model:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def process_website(self, url, resume):
-        min_crawl_time = 7  # Set a time interval between crawls
-        max_crawl_time = 10  # Set a time interval between crawls
+        min_crawl_time = 10  # Set a time interval between crawls
+        max_crawl_time = 20  # Set a time interval between crawls
         start_url = url
         new_urls = deque()
         processed_urls = set()
@@ -65,7 +65,7 @@ class Model:
                 parts = urlsplit(url)
                 base_url = "{0.scheme}://{0.netloc}".format(parts)
                 path = url[:url.rfind('/') + 1] if '/' in parts.path else url
-                print("Processing %s" % url)
+                print("Scannar: " + url)
 
                 try:
                     headers = {
@@ -104,22 +104,22 @@ class Model:
         if emailAdresses:
             emails = emailAdresses
 
-        with open("Output.txt", "w") as text_file:
+        with open("Output.txt", "w", encoding='utf-8') as text_file:
             for item in emails:
                 text_file.write(item+"\n")
 
-        with open("data/processed_urls.txt", "w") as text_file:
+        with open("data/processed_urls.txt", "w", encoding='utf-8') as text_file:
             for item in processedURLs:
                 text_file.write(item+"\n")
 
-        with open("data/external_urls.txt", "w") as text_file:
+        with open("data/external_urls.txt", "w", encoding='utf-8') as text_file:
             for item in externalURLs:
                 text_file.write(item+"\n")
 
-        with open("data/new_urls.txt", "w") as text_file:
+        with open("data/new_urls.txt", "w", encoding='utf-8') as text_file:
             for item in newURLs:
                 text_file.write(item+"\n")
 
-        with open("data/emails.txt", "w") as text_file:
+        with open("data/emails.txt", "w", encoding='utf-8') as text_file:
             for item in emailAdresses:
                 text_file.write(item+"\n")
