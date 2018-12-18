@@ -7,17 +7,19 @@ import time
 import re
 import random
 import os
+from models import Util
 
 
 class Model:
 
     def __init__(self):
-        print("Startar")
+        print("Starting")
 
     def cls(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def process_website(self, url, resume):
+    def process_website(self, url, resume, image_recognition):
+        print(image_recognition)
         min_crawl_time = 10  # Set a time interval between crawls
         max_crawl_time = 20  # Set a time interval between crawls
         start_url = url
@@ -65,7 +67,7 @@ class Model:
                 parts = urlsplit(url)
                 base_url = "{0.scheme}://{0.netloc}".format(parts)
                 path = url[:url.rfind('/') + 1] if '/' in parts.path else url
-                print("Scannar: " + url)
+                print("Checking: " + url)
 
                 try:
                     headers = {
@@ -79,9 +81,16 @@ class Model:
                     continue
 
                 new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", response.text, re.I))
+                # TODO: Add image recognition
+                if image_recognition == "True":
+                    print("Looking through images...")
+                    images = deque(re.findall(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)", response.text, re.I))
+                    while len(images):
+                        print(Util.Util.read_text_on_image(self, images.popleft()))
+
                 emails.update(new_emails)
 
-                print("Hittade: "+str(len(new_emails))+" epostadresser")
+                print("Found: "+str(len(new_emails))+" email addresses")
 
                 soup = BeautifulSoup(response.text, "html.parser")
 
@@ -95,12 +104,12 @@ class Model:
                         new_urls.append(link)
                 time.sleep(random.randint(min_crawl_time, max_crawl_time))
             else:
-                print("Extern url hittad: "+url)
+                print("Found external url: "+url)
                 external_urls.add(url)
 
     # Saves everything
     def save(self, emails, processedURLs, newURLs, externalURLs, emailAdresses):
-        print("Sparar...")
+        print("Saving...")
         if emailAdresses:
             emails = emailAdresses
 
